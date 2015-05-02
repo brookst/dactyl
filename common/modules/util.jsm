@@ -390,7 +390,7 @@ var Util = Module("Util", XPCOM([Ci.nsIObserver, Ci.nsISupportsWeakReference]), 
 
                 let quote = util.identity;
                 if (flags.has("q"))
-                    quote = function quote(obj) typeof obj === "number" ? obj : String.quote(obj);
+                    quote = function quote(obj) typeof obj === "number" ? obj : "\"" + String(obj).replace(/([\\'"])/g, "\\$1").replace("\n", "\\n", "g").replace("\t", "\\t", "g") + "\"";
                 if (flags.has("e"))
                     quote = function quote(obj) "";
 
